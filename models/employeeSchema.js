@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const employeeSchema = new mongoose.Schema({
     name:{
         type: String,
-        required : true
     },
     email:{
         type: String,
@@ -20,17 +19,13 @@ const employeeSchema = new mongoose.Schema({
     },
 
     completedReviews :[{
-        review : {
-            type: mongoose.Schema.Types.ObjectId,
-            ref : 'Review'
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Review'
     }],
 
     pendingReviews :[{
-        employee :{
-            type: mongoose.Schema.Types.ObjectId,
-            ref : 'Employee'
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Employee'
     }],
 
     myReviews :[{

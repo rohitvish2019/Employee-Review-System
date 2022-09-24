@@ -1,0 +1,44 @@
+
+.main-container{
+    border: 1px solid black;
+    width: 40%;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+}
+
+.form-item{
+    margin: 4%;
+    font-size: 1.5rem;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+
+.heading{
+    font-size: 2rem;
+    margin: 7%;
+    display: inline;
+    border: 0.5px dotted black;
+    width: 50%;
+    text-align: center;
+    border-radius: 1.5rem;
+}
+
+.toggeler{
+    display: flex;
+    justify-content:space-between;
+}
+
+#signup-form-container{
+    display: none;
+}

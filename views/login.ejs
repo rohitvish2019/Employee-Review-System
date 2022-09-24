@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Login/ Sign-up</title>
-        <link href="/css/home.css" rel="stylesheet">
+        <link href="/css/login.css" rel="stylesheet">
     </head>
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -12,7 +12,7 @@
             </div>
             <div class="form-container" id="login-form-container"> 
                 <div >
-                    <form action="/home" class="login-form" method="POST" id="login-form">
+                    <form action="/login" class="login-form" method="POST" id="login-form">
                         <input class="form-item" type="email" name="email" placeholder="Your Email">
                         <input class="form-item" type="password" name="password" placeholder="Your Password">
                         <input class="form-item" type="submit" value="Login" style="width:50%; align-self: center;">
@@ -24,14 +24,25 @@
             <div class="form-container" id="signup-form-container">
                 <form action="/api/v1/employee/create" class="login-form" method="POST" id="signup-form" >
                     <input class="form-item" type="text" name="fullname" placeholder="Your Full Name">
-                    <input class="form-item" type="email" name="email" placeholder="Your Email">
-                    <input class="form-item" type="password" name="password" placeholder="Your Password">
-                    <input class="form-item" type="password" placeholder="Confirm Password">
-                    <input class="form-item" type="submit" value="Sign-Up Now" style="width:50%; align-self: center;">
+                    <input class="form-item" type="password" name="password" placeholder="Your Password"> 
+                    <input type="text" hidden id="userid" name="userid">
+                    <input class="form-item" id="submit-sign-up" type="submit" value="Sign-Up Now" style="width:50%; align-self: center;">
                 </form>
+                
+                <div id="unverified">
+                    <input class="form-item" type="email" name="email" placeholder="Your Email" id="email">
+                    <input class="form-item" type="button" value="Get OTP" id="get-otp">
+                    <input type="number" name="otp" class="form-item" id="otp" placeholder="OTP">
+                    <input class="form-item" type="button" value="Verify" id="verify-button">
+                </div>
+                
+
             </div>
+
+            
+
         </div>
         
-        <script src="/js/home.js"></script>
+        <script src="/js/login.js"></script>
     </body>
 </html>

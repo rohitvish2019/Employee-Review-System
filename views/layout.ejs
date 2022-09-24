@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>
+            <%= title  %>
+        </title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <%- style %>
+        
+    </head>
+
+    <body>
+        <link href="/css/layout.css" crossorigin="anonymous">
+        <%- include('_header'); %>
+
+        <%- body %>
+
+
+        <%- include('_footer'); %>
+
+        <%- script %>
+    </body>
+</html>

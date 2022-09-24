@@ -1,10 +1,31 @@
-<html>
-    <header>
-        <title>
-            Home
-        </title>
-    </header>
-    <body>
-        <h1>This is home page</h1>
-    </body>
-</html>
+<link rel="stylesheet" href="/css/home.css">
+<body>
+    <h1>Welcome <%=profile.name%></h1>
+    <div>
+        <button class="button" id="showAllEmployees">Show all employees</button>
+        <button class="button" id="addNewEmployee">Add new employee</button>
+    <div id="allEmployeeContainer">
+        <h3>All Employees</h3>
+        <ul id="allEmployee">
+        </ul>
+    </div>
+
+    <div id="addNewEmployeeContainer">
+        <h3>Add New Employee</h3>
+        <form action="/employee/create" method="POST">
+            <input type="text" name="name" placeholder="Employee Name">
+            <input type="email" name="email" placeholder="Employee Email">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Add Employee">
+        </form>
+    </div>
+
+
+    <div id="employeeReviews">
+        <div id="myReviews"></div>
+    </div>
+
+    <div id='requestReviewFormContainer'>
+    </div>
+</body>
+<script src = /js/home.js></script>

@@ -1,12 +1,9 @@
 const Employee = require('../../../models/employeeSchema');
+
 module.exports.addNewEmployee = async function(req, res){
+    console.log(req.body);
     try{
-        let newEmployee = await Employee.create({
-            name: req.body.fullname,
-            email : req.body.email,
-            password : req.body.password,
-            isAdmin : false
-        });
+        let emp = await Employee.findByIdAndUpdate(req.body.userid,{name: req.body.fullname,password : req.body.password});
         if(req.xhr){
             return res.status(200).json({
                 message: "New employee created successfully"

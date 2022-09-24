@@ -1,0 +1,38 @@
+.page-header{
+    height: 13%;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: center;
+}
+
+.header-items{
+    width: 15%;
+    height: 100%;
+    text-align: center;
+    color: darkblue;
+    /*
+    margin-left: 3%;
+    margin-right: 3%;
+    display: inline;
+    font-size: 1.5rem;
+    */
+    
+}
+.header-mid{
+    width: 60%;
+    height: 100%;
+    text-align: center;
+    color: darkblue;
+}
+
+.header-items a{
+    text-decoration: none;
+}
+
+
+
+.icon{
+    height: 100%;
+    width: 8%;
+    border-radius: 50%;
+}

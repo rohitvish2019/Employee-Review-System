@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const { request } = require('http');
 const app = express();
 const httpPort = 80;
+const expressLayouts = require('express-ejs-layouts');
 const securePort = 443;
 const db = require('./configs/mongoose');
 const session = require('express-session');
@@ -19,6 +20,9 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(express.static('./assets'));
 app.use(cookieParser());
+app.use(expressLayouts);
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 app.use(session({
     name: 'EmployeeReview',
