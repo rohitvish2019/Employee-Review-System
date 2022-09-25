@@ -1,9 +1,16 @@
 <link rel="stylesheet" href="/css/home.css">
+
+
 <body>
     <h1>Welcome <%=profile.name%></h1>
     <div>
-        <button class="button" id="showAllEmployees">Show all employees</button>
-        <button class="button" id="addNewEmployee">Add new employee</button>
+        
+        <%if(profile.isAdmin){%>
+            <%}%>
+            <button class="button" id="showAllEmployees">Show all employees</button>
+            <button class="button" id="addNewEmployee">Add new employee</button>
+            <button class="button" id="prformanceReview">Performance Review</button>
+        <button class="button" id="pendingItems">Pending Items</button>
     <div id="allEmployeeContainer">
         <h3>All Employees</h3>
         <ul id="allEmployee">
@@ -25,7 +32,36 @@
         <div id="myReviews"></div>
     </div>
 
-    <div id='requestReviewFormContainer'>
+    <div class="performanceReviewContaier" id='performanceReviewContaier'>
+        <form class="performanceReviewContaier" action="/employee/review-request" method="POST">
+            <h3>Employee to be reviewd</h3>
+            <input name="toBeReviewd" class="performanceReviewContaier" list="toBeReviewd">
+            <datalist id="toBeReviewd">
+                <%for(let i=0;i<allEmployees.length;i++){%>
+                    <option value="<%=allEmployees[i].email%>" ><%=allEmployees[i].name%></option>
+                <%}%>
+            </datalist>
+
+            <h3>Reviewer</h3>
+            <input name="Reviewer" class="performanceReviewContaier" list="Reviewer">
+            <datalist id="Reviewer">
+                <%for(let i=0;i<allEmployees.length;i++){%>
+                    <option value="<%=allEmployees[i].email%>" ><%=allEmployees[i].name%></option>
+                <%}%>
+            </datalist> 
+
+            <input class="performanceReviewContaier" type="submit" value="Request">
+        </form>
+    </div>
+
+    <div id="pendingItemsContainer">
+        <%for(let i=0;i<profile.pendingReviews.length;i++){%>
+            <div style="display:block;" id="pendingItemForm-<%=profile.pendingReviews[i]._id%>">
+                <div class="pending-reviews"><%=profile.pendingReviews[i].name%></div>
+                <div style="display:inline-block; vertical-align:middle ;"><textarea name="" id="pendingItem-<%=profile.pendingReviews[i]._id%>" cols="80" rows="3"></textarea></div>
+                <button class="submitReview button" id="submitReview-<%=profile.pendingReviews[i]._id%>">Review</button>
+            </div>
+        <%}%>
     </div>
 </body>
 <script src = /js/home.js></script>

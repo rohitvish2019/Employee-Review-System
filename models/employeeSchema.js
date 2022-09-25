@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const arrayUniquePlugin = require('mongoose-unique-array');
 const employeeSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -25,7 +26,8 @@ const employeeSchema = new mongoose.Schema({
 
     pendingReviews :[{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'Employee'
+        ref : 'Employee',
+        unique : true
     }],
 
     myReviews :[{

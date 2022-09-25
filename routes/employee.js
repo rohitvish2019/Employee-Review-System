@@ -10,6 +10,6 @@ router.get('/getMyReviews/:id', passport.checkAuthentication, employeeController
 router.post('/create', passport.checkAuthentication, employeeController.createNew)
 router.delete('/:id',passport.checkAuthentication, employeeController.deleteEmployee);
 router.post('/update/:id', passport.checkAuthentication, employeeController.updateEmployee);
-
+router.post('/review-request', passport.checkAuthentication, employeeController.assignReviewer);
 
 module.exports = router;

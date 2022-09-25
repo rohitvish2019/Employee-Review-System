@@ -50,3 +50,15 @@
 .update{
     display: none;
 }
+
+.performanceReviewContaier{
+    font-size: 1.2rem;
+    display: block;
+}
+
+.pending-reviews{
+    font-size: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
+    width: 15%;
+}

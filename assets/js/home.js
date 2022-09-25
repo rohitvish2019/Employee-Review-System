@@ -1,6 +1,8 @@
 document.getElementById('addNewEmployeeContainer').style.display='none'
 document.getElementById('employeeReviews').style.display='none'
 document.getElementById('allEmployeeContainer').style.display='none'
+document.getElementById('performanceReviewContaier').style.display='none'
+document.getElementById('pendingItemsContainer').style.display='none'
 document.addEventListener('click', function(event){
     if(event.target.id == 'showAllEmployees'){
         getAllEmployees();
@@ -14,9 +16,13 @@ document.addEventListener('click', function(event){
         removeEmployee();
     }
 
+    else if(event.target.id == 'prformanceReview'){
+        openPerformanceReview();
+    }
+
     else if(event.target.classList[0] == 'addReview'){
-        let id = event.target.id;
-        createNewReview(id.slice(10))
+        let id = event.target.id.slice(10);
+        createNewReview(id, document.getElementById('review-'+id).value, false )
     }
 
     else if(event.target.classList[0]=='showAll'){
@@ -27,6 +33,16 @@ document.addEventListener('click', function(event){
     else if(event.target.classList[0] == 'hide'){
         let id =event.target.id;
         hideReviews(id.slice(5));
+    }
+
+    else if(event.target.classList[0] == 'submitReview'){
+        let id= event.target.id.slice(13)
+        createNewReview(id, document.getElementById('pendingItem-'+id).value, true);
+        document.getElementById('pendingItemForm-'+id).remove();   
+    }
+
+    else if(event.target.id == 'pendingItems'){
+        openPedingItems();
     }
 
     else if(event.target.classList[0] == 'edit'){
@@ -51,6 +67,13 @@ document.addEventListener('click', function(event){
 })
 
 
+function openPedingItems(){
+    document.getElementById('addNewEmployeeContainer').style.display='none'
+    document.getElementById('employeeReviews').style.display='none'
+    document.getElementById('allEmployeeContainer').style.display='none'
+    document.getElementById('performanceReviewContaier').style.display='none'
+    document.getElementById('pendingItemsContainer').style.display='block'
+}
 
 
 function getAllEmployees(){
@@ -70,6 +93,7 @@ function showEmploeeDetails(employees){
     document.getElementById('addNewEmployeeContainer').style.display='none'
     document.getElementById('employeeReviews').style.display='none'
     document.getElementById('allEmployeeContainer').style.display='block'
+    document.getElementById('pendingItemsContainer').style.display='none'
     let container = document.getElementById('allEmployee');
     container.innerHTML='';
     for(let i=0;i<employees.length;i++){
@@ -93,13 +117,23 @@ function showEmploeeDetails(employees){
 }
 
 
-function createNewReview(id){
+function openPerformanceReview(){
+    document.getElementById('addNewEmployeeContainer').style.display='none'
+    document.getElementById('employeeReviews').style.display='none'
+    document.getElementById('allEmployeeContainer').style.display='none'
+    document.getElementById('performanceReviewContaier').style.display='block'
+    document.getElementById('pendingItemsContainer').style.display='none'
+}
+
+
+function createNewReview(id, comment, isInPending){
     $.ajax({
         type: 'post',
         url : '/review/create',
         data :{
             createdFor : id,
-            comment : document.getElementById('review-'+id).value
+            comment : comment,
+            isInPending:isInPending
         },
         success: function(data){
             console.log(data);
