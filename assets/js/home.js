@@ -200,6 +200,7 @@ function addNewEmployee(){
     document.getElementById('addNewEmployeeContainer').style.display='block'
     document.getElementById('employeeReviews').style.display='none'
     document.getElementById('allEmployeeContainer').style.display='none'
+    document.getElementById('pendingItemsContainer').style.display='none'
 }
 
 

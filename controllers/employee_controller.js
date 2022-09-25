@@ -59,9 +59,9 @@ module.exports.getMyReviews =async function(req, res){
 }
 
 module.exports.createNew =async function(req, res){
-
+    let user = await Employee.findById(req.user);
     try{
-        if(req.user){
+        if(user && user.isAdmin == true){
             await Employee.create({
                 name:req.body.name,
                 email:req.body.email,
