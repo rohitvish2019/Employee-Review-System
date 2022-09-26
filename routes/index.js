@@ -12,7 +12,7 @@ router.post('/email-verify', userController.emailVerify);
 router.use('/login', require('./login'));
 router.use('/verify', require('./users'));
 router.use('/home',passport.checkAuthentication, require('./home'));
-router.use('/employee', passport.checkAuthentication, require('./employee'));
+router.use('/employee', require('./employee'));
 router.use('/review',passport.checkAuthentication, require('./review'));
 
 module.exports = router;

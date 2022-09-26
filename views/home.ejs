@@ -6,11 +6,12 @@
     <div>
         
         <%if(profile.isAdmin){%>
-            <%}%>
+            
             <button class="button" id="showAllEmployees">Show all employees</button>
             <button class="button" id="addNewEmployee">Add new employee</button>
             <button class="button" id="prformanceReview">Performance Review</button>
-        <button class="button" id="pendingItems">Pending Items</button>
+            <button class="button" id="pendingItems">Pending Items</button>
+        <%}%>
     <div id="allEmployeeContainer">
         <h3>All Employees</h3>
         <ul id="allEmployee">
@@ -20,9 +21,11 @@
     <div id="addNewEmployeeContainer">
         <h3>Add New Employee</h3>
         <form action="/employee/create" method="POST">
+            <input height="1.3rem" type="checkbox" name="isAdmin"><label style="font-size:1.3rem ;">Make admin?</label>
             <input class="review-details" type="text" name="name" placeholder="Employee Name">
             <input class="review-details" type="email" name="email" placeholder="Employee Email">
             <input class="review-details" type="password" name="password" placeholder="Password">
+            
             <input class="button" type="submit" value="Add Employee">
         </form>
     </div>

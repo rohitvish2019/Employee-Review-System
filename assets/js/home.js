@@ -194,7 +194,6 @@ function showReviewsForEmployee(id){
                 <div class="employee-name">${details.reviews[i].createdBy.name}</div>
                 <div class="employee-details">${details.reviews[i].createdBy.email}</div>
                 <div class="review-content">${details.reviews[i].comment}</div>
-                
                 <button class='deleteReview button' id='deleteReview-${details.reviews[i]._id}' style='margin-left:8%;color:red;background-color:white;font-weight:bolder'>X</button>
                 `
                 document.getElementById('con-'+id).append(review);

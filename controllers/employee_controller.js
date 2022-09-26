@@ -59,18 +59,31 @@ module.exports.getMyReviews =async function(req, res){
 }
 
 module.exports.createNew =async function(req, res){
-    let user = await Employee.findById(req.user);
+    console.log(req.body);
     try{
+        let user = await Employee.findById(req.user);
         if(user && user.isAdmin == true){
             await Employee.create({
                 name:req.body.name,
                 email:req.body.email,
-                password:req.body.password
+                password:req.body.password,
+                isAdmin:req.body.isAdmin
             });
-        }else{
-            console.log("Unauthorized request");
         }
-        
+        else{
+            let user = await Employee.findById(req.body.userid);
+            if(user){
+                let isUserAdmin = false;
+                if(req.body.isAdmin == 'on'){
+                    isUserAdmin = true;
+                }
+                await Employee.findByIdAndUpdate(req.body.userid, {name: req.body.name, password: req.body.password, isAdmin: isUserAdmin});
+            }
+            else{
+                console.log("Unverified user")
+            }
+        }
+
     }catch(err){
         console.log(err);
     }

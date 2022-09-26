@@ -62,7 +62,7 @@ module.exports.emailVerify = async function(req, res){
             user = await Email.findOne({email:req.body.email});
             if(user){
                 console.log("user found")
-                Email.findOneAndUpdate({email:req.body.email},{$set : {otp:otp}});
+                await Email.findOneAndUpdate({email:req.body.email},{$set : {otp:otp}});
                 user.update({otp:otp});
                 user.save();
             }
@@ -93,13 +93,14 @@ module.exports.verifyOTP = async function(req, res){
     try{
         let unverified = await Email.findOne({email:req.body.email});
         if(unverified && unverified.otp == req.body.otp){
+            let pass = 'autoGen'+ otpGenerator.generate(15);
             let newEmployee = await Employee.create({
                 email:req.body.email,
-                password:'123456'
+                password: pass
             });
             unverified.remove();
             return res.status(200).json({
-                message: " Verified",
+                message: "Verified",
                 id : newEmployee._id
             });
         }
