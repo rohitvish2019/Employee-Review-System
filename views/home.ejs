@@ -20,10 +20,10 @@
     <div id="addNewEmployeeContainer">
         <h3>Add New Employee</h3>
         <form action="/employee/create" method="POST">
-            <input type="text" name="name" placeholder="Employee Name">
-            <input type="email" name="email" placeholder="Employee Email">
-            <input type="password" name="password" placeholder="Password">
-            <input type="submit" value="Add Employee">
+            <input class="review-details" type="text" name="name" placeholder="Employee Name">
+            <input class="review-details" type="email" name="email" placeholder="Employee Email">
+            <input class="review-details" type="password" name="password" placeholder="Password">
+            <input class="button" type="submit" value="Add Employee">
         </form>
     </div>
 
@@ -35,7 +35,7 @@
     <div class="performanceReviewContaier" id='performanceReviewContaier'>
         <form class="performanceReviewContaier" action="/employee/review-request" method="POST">
             <h3>Employee to be reviewd</h3>
-            <input name="toBeReviewd" class="performanceReviewContaier" list="toBeReviewd">
+            <input name="toBeReviewd" class="performanceReviewContaier review-details" list="toBeReviewd">
             <datalist id="toBeReviewd">
                 <%for(let i=0;i<allEmployees.length;i++){%>
                     <option value="<%=allEmployees[i].email%>" ><%=allEmployees[i].name%></option>
@@ -43,25 +43,27 @@
             </datalist>
 
             <h3>Reviewer</h3>
-            <input name="Reviewer" class="performanceReviewContaier" list="Reviewer">
+            <input name="Reviewer" class="performanceReviewContaier review-details" list="Reviewer">
             <datalist id="Reviewer">
                 <%for(let i=0;i<allEmployees.length;i++){%>
                     <option value="<%=allEmployees[i].email%>" ><%=allEmployees[i].name%></option>
                 <%}%>
             </datalist> 
 
-            <input class="performanceReviewContaier" type="submit" value="Request">
+            <input class="performanceReviewContaier button" type="submit" value="Request" style="margin-top:4% ;">
         </form>
     </div>
 
     <div id="pendingItemsContainer">
-        <%for(let i=0;i<profile.pendingReviews.length;i++){%>
-            <div style="display:block;" id="pendingItemForm-<%=profile.pendingReviews[i]._id%>">
-                <div class="pending-reviews"><%=profile.pendingReviews[i].name%></div>
-                <div style="display:inline-block; vertical-align:middle ;"><textarea name="" id="pendingItem-<%=profile.pendingReviews[i]._id%>" cols="80" rows="3"></textarea></div>
-                <button class="submitReview button" id="submitReview-<%=profile.pendingReviews[i]._id%>">Review</button>
-            </div>
-        <%}%>
+        <h2>Pending action items for you</h2>
+            <%for(let i=0;i<profile.pendingReviews.length;i++){%>
+                <div style="display:block;margin-top: 4%;"id="pendingItemForm-<%=profile.pendingReviews[i]._id%>">
+                    <div class="pending-reviews"><%=profile.pendingReviews[i].name%></div>
+                    <div style="display:inline-block; vertical-align:middle ;"><textarea class="reviewText" placeholder="Write your review here ..." name="" id="pendingItem-<%=profile.pendingReviews[i]._id%>" cols="80" rows="2"></textarea></div>
+                    <button class="submitReview button" id="submitReview-<%=profile.pendingReviews[i]._id%>">Review</button>
+                </div>
+            <%}%>
+        
     </div>
 </body>
 <script src = /js/home.js></script>

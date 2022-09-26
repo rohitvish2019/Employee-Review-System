@@ -2,7 +2,23 @@ document.getElementById('addNewEmployeeContainer').style.display='none'
 document.getElementById('employeeReviews').style.display='none'
 document.getElementById('allEmployeeContainer').style.display='none'
 document.getElementById('performanceReviewContaier').style.display='none'
-document.getElementById('pendingItemsContainer').style.display='none'
+document.addEventListener('mouseover', function(event){
+    if(event.target.id == 'showAllEmployees'){
+        getAllEmployees();
+    }
+
+    else if(event.target.id=='addNewEmployee'){
+        addNewEmployee();
+    }
+
+    else if(event.target.id == 'prformanceReview'){
+        openPerformanceReview();
+    }
+
+    else if(event.target.id == 'pendingItems'){
+        openPedingItems();
+    }
+})
 document.addEventListener('click', function(event){
     if(event.target.id == 'showAllEmployees'){
         getAllEmployees();
@@ -96,22 +112,23 @@ function showEmploeeDetails(employees){
     document.getElementById('pendingItemsContainer').style.display='none'
     let container = document.getElementById('allEmployee');
     container.innerHTML='';
+    
     for(let i=0;i<employees.length;i++){
         let item = document.createElement('li');
         item.innerHTML=
         `
-        <div style='display:inline'><input id='name-${employees[i]._id}' class='employee-details' type='text' value = '${employees[i].name}' readonly></div>
+        <div style='display:inline'><input id='name-${employees[i]._id}' class='employee-name' type='text' value = '${employees[i].name}' readonly></div>
         <div style='display:inline'><input id='email-${employees[i]._id}' class='employee-details' type='text' value='${employees[i].email}' readonly></div>
-        <textarea class='reviewText' id="review-${employees[i]._id}"></textarea>
+        <textarea cols='40' class='reviewText' id="review-${employees[i]._id}" placeholder='Write review here...'></textarea>
         <button class='addReview button' id="addReview-${employees[i]._id}">Review now</button>
         <button class='showAll button' id='showAll-${employees[i]._id}'>Show all reviews</button>
         <button class = 'removeMe button' id='removeMe-${employees[i]._id}'>Remove</button>
         <button class = 'edit button' id='edit-${employees[i]._id}'>Edit</button>
         <button class = 'update button' id='update-${employees[i]._id}'>Update</button>
-        <button class = 'hide button' id='hide-${employees[i]._id}'>Hide</button>
-        <div id='con-${employees[i]._id}'></div>
+        <div class='reviews-container' id='con-${employees[i]._id}'></div>
         `
         item.id = 'li-'+employees[i]._id;
+        item.classList.add('empDetailsContainer')
         container.append(item);
     }
 }
@@ -148,7 +165,7 @@ function createNewReview(id, comment, isInPending){
 function showReviewsForEmployee(id){
     document.getElementById('con-'+id).style.display='block';
     document.getElementById('addNewEmployeeContainer').style.display='none'
-    document.getElementById('hide-'+id).style.display='inline-block'
+
     document.getElementById('employeeReviews').style.display='block'
     $.ajax({
         type:'get',
@@ -160,9 +177,11 @@ function showReviewsForEmployee(id){
             let heading = document.createElement('div');
             heading.innerHTML=
             `
-            <div class="review-details">Name </div>
-            <div class="review-details">Email</div>
-            <div class="review-details">Review</div>
+            <div class="employee-name">Name </div>
+            <div class="employee-details">Email</div>
+            <div class="review-content">Review</div>
+            <div class='employee-name'>Action</button></div>
+            <button class = 'hide button' id='hide-${id}'>X</button>
             `
             document.getElementById('con-'+id).append(heading)
             heading.classList.add('review')
@@ -172,10 +191,11 @@ function showReviewsForEmployee(id){
                 let review = document.createElement('div');
                 review.innerHTML=
                 `
-                <div class="review-details">${details.reviews[i].createdBy.name}</div>
-                <div class="review-details">${details.reviews[i].createdBy.email}</div>
+                <div class="employee-name">${details.reviews[i].createdBy.name}</div>
+                <div class="employee-details">${details.reviews[i].createdBy.email}</div>
                 <div class="review-content">${details.reviews[i].comment}</div>
-                <button class='deleteReview' id='deleteReview-${details.reviews[i]._id}'>Delete</button>
+                
+                <button class='deleteReview button' id='deleteReview-${details.reviews[i]._id}' style='margin-left:8%;color:red;background-color:white;font-weight:bolder'>X</button>
                 `
                 document.getElementById('con-'+id).append(review);
                 review.classList.add('review')
@@ -201,6 +221,7 @@ function addNewEmployee(){
     document.getElementById('employeeReviews').style.display='none'
     document.getElementById('allEmployeeContainer').style.display='none'
     document.getElementById('pendingItemsContainer').style.display='none'
+    document.getElementById('performanceReviewContaier').style.display='none'
 }
 
 

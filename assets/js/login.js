@@ -54,11 +54,15 @@ document.addEventListener('click', function(event){
 function openLoginForm(){
     document.getElementById('login-form-container').style.display= 'flex'
     document.getElementById('signup-form-container').style.display = 'none'
+    document.getElementById('login').style.backgroundColor='green'
+    document.getElementById('sign-up').style.backgroundColor='transparent'
 }
 
 function openSignupForm(){
     document.getElementById('login-form-container').style.display= 'none'
     document.getElementById('signup-form-container').style.display = 'flex'
+    document.getElementById('login').style.backgroundColor='transparent'
+    document.getElementById('sign-up').style.backgroundColor='green'
 }
 
 function initApp(){

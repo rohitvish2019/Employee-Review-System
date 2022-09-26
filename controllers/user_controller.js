@@ -1,6 +1,7 @@
 let Email = require('../models/verify');
 let Employee = require('../models/employeeSchema');
-
+let mailer = require('../mailers/comment_mailer');
+const otpGenerator = require('otp-generator');
 module.exports.login = function(req, res){
     try{
         if(req.isAuthenticated()){
@@ -56,10 +57,25 @@ module.exports.emailVerify = async function(req, res){
             })
         }
         else{
-            await Email.create({
-                email: req.body.email,
-                otp: '123456'
-            });
+            let user;
+            let otp = otpGenerator.generate(6,{upperCaseAlphabets:false, lowerCaseAlphabets: false, specialChars:false})
+            user = await Email.findOne({email:req.body.email});
+            if(user){
+                console.log("user found")
+                Email.findOneAndUpdate({email:req.body.email},{$set : {otp:otp}});
+                user.update({otp:otp});
+                user.save();
+            }
+            else{
+                console.log("user not found")
+                user = await Email.create({
+                    email: req.body.email,
+                    otp:otp
+                });
+            }
+            
+            mailer.newUser(user, otp);
+            console.log(otp);
             return res.status(200).json({
                 message:"success",
                 email : req.body.email

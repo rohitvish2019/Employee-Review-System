@@ -22,23 +22,37 @@
     border-left: none;
     border-top: none;
     border-right: none;
+    background-color: transparent;
+    color: azure;
 }
 
 .heading{
     font-size: 2rem;
-    margin: 7%;
     display: inline;
-    border: 0.5px dotted black;
     width: 50%;
     text-align: center;
     border-radius: 1.5rem;
 }
 
+
+
+.login{
+    background-color: rgb(32, 143, 69);
+}
 .toggeler{
     display: flex;
     justify-content:space-between;
+    margin-top: 7%;
+    border-radius: 1.5rem;
+    border: 1px solid green;
 }
 
 #signup-form-container{
     display: none;
+}
+
+.button{
+    font-size: 1.3rem;
+    background-color: rgb(45 72 73);
+    border-radius: 1.3rem;
 }

@@ -1,0 +1,10 @@
+.page-footer{
+    height: 15%;
+    position: fixed;
+    background-color: rgb(45, 72, 73);
+    width: 103%;
+    bottom: 0%;
+    text-align: center;
+    line-height: 5px;
+
+}

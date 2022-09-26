@@ -7,15 +7,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <div class="main-container">
             <div class="toggeler">
-                <span class="heading" id="login">Login</span>
-                <span class="heading" id="sign-up">Sign-Up</span>
+                <span class="heading login" id="login">Login</span>
+                <span class="heading sign-up" id="sign-up">Sign-Up</span>
             </div>
             <div class="form-container" id="login-form-container"> 
                 <div >
                     <form action="/login" class="login-form" method="POST" id="login-form">
                         <input class="form-item" type="email" name="email" placeholder="Your Email">
                         <input class="form-item" type="password" name="password" placeholder="Your Password">
-                        <input class="form-item" type="submit" value="Login" style="width:50%; align-self: center;">
+                        <input class="button" type="submit" value="Login" style="width:50%; align-self: center;">
                     </form>
                 </div>
     
@@ -26,14 +26,14 @@
                     <input class="form-item" type="text" name="fullname" placeholder="Your Full Name">
                     <input class="form-item" type="password" name="password" placeholder="Your Password"> 
                     <input type="text" hidden id="userid" name="userid">
-                    <input class="form-item" id="submit-sign-up" type="submit" value="Sign-Up Now" style="width:50%; align-self: center;">
+                    <input class="button" id="submit-sign-up" type="submit" value="Sign-Up Now" style="width:50%; align-self: center;">
                 </form>
                 
                 <div id="unverified">
-                    <input class="form-item" type="email" name="email" placeholder="Your Email" id="email">
-                    <input class="form-item" type="button" value="Get OTP" id="get-otp">
+                    <input class="form-item" style="margin-top: 20%;" type="email" name="email" placeholder="Your Email" id="email">
+                    <input class="button" type="button" value="Get OTP" id="get-otp">
                     <input type="number" name="otp" class="form-item" id="otp" placeholder="OTP">
-                    <input class="form-item" type="button" value="Verify" id="verify-button">
+                    <input class="button" type="button" value="Verify" id="verify-button">
                 </div>
                 
 
