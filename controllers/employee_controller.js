@@ -5,6 +5,7 @@ module.exports.getAll =async function(req, res){
         let user = await Employee.findById(req.user);
         if(user && user.isAdmin == true){
             let allEmployees = await Employee.find({_id:{$ne : req.user}},'name email');
+            req.flash('success',' All employees');
             return res.status(200).json({
                 allEmployees :allEmployees,
                 message:"Fetched data successfully"
@@ -69,6 +70,7 @@ module.exports.createNew =async function(req, res){
                 password:req.body.password,
                 isAdmin:req.body.isAdmin
             });
+            req.flash('success','Employee added successfully');
         }
         else{
             let user = await Employee.findById(req.body.userid);
@@ -81,11 +83,13 @@ module.exports.createNew =async function(req, res){
             }
             else{
                 console.log("Unverified user")
+                req.flash('error','Unverified user');
             }
         }
 
     }catch(err){
         console.log(err);
+        req.flash('error','Unauthorized request');
     }
     return res.redirect('back');
 }
@@ -100,6 +104,7 @@ module.exports.deleteEmployee =async function(req, res){
             return res.status(200).json({
                 message:"Deleted employee successfully"
             })
+            
         }
         else{
             return res.status(403).json({
@@ -149,6 +154,7 @@ module.exports.assignReviewer =async function(req, res){
         if(toBeReviwed && reviewer){
             for(let i=0;i<reviewer.pendingReviews.length;i++){
                 if(reviewer.pendingReviews[i].toString() == toBeReviwed._id.toString()){
+                    req.flash('error',' Already requested one review');
                     break;
                 }
                 else{
@@ -158,9 +164,11 @@ module.exports.assignReviewer =async function(req, res){
             if(count == reviewer.pendingReviews.length){
                 reviewer.pendingReviews.push(toBeReviwed._id);
                 reviewer.save();
+                req.flash('success',' Requested for review');
             }
         }
     }else{
+        req.flash('error',' You are not authorized to make this request');
         console.log("Unauthorized request");
     }
     return res.redirect('back');

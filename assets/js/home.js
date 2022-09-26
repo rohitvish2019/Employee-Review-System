@@ -39,6 +39,7 @@ document.addEventListener('click', function(event){
     else if(event.target.classList[0] == 'addReview'){
         let id = event.target.id.slice(10);
         createNewReview(id, document.getElementById('review-'+id).value, false )
+        document.getElementById('review-'+id).value='';
     }
 
     else if(event.target.classList[0]=='showAll'){
@@ -98,9 +99,23 @@ function getAllEmployees(){
         type:'get',
         success:function(data){
             showEmploeeDetails(data.allEmployees);
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
         },
         error: function(err){
             console.log(err.responseText);
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
         }
     })
 }
@@ -154,9 +169,23 @@ function createNewReview(id, comment, isInPending){
         },
         success: function(data){
             console.log(data);
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
         },
         error: function(err){
             console.log(err.responseText);
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
         }
     })
 }
@@ -171,6 +200,13 @@ function showReviewsForEmployee(id){
         type:'get',
         url : '/employee/getMyReviews/'+id,
         success:function(data){
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             document.getElementById('con-'+id).innerHTML=''
             let details = data.data;
             console.log(details.reviews[0]);
@@ -204,6 +240,13 @@ function showReviewsForEmployee(id){
         },
         error: function(err){
             console.log(err.responseText);
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
         }
     });
 
@@ -230,9 +273,23 @@ function removeEmployee(id){
         url:'/employee/'+id,
         type:'delete',
         success: function(data){
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             getAllEmployees()
         },
         error: function(err){
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             console.log(err.responseText);
         }
     })
@@ -259,10 +316,23 @@ function updateEmployee(id){
         },
 
         success: function(data){
-            console.log(data);
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             getAllEmployees();
         },
         error: function(err){
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             console.log(err.responseText);
         }
     })
@@ -274,9 +344,23 @@ function deleteReview(id){
         url:'/review/'+id,
         type:'delete',
         success: function(data){
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             console.log(data);
         },
         error: function(err){
+            new Noty({
+                theme: 'relax',
+                text: err.responseText,
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show(); 
             console.log(err.responseText);
         }
     })

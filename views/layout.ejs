@@ -4,13 +4,19 @@
             <%= title  %>
         </title>
         <link rel="icon" type="image/x-icon" href="/images/icon.webp">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
         <%- style %>
         
     </head>
-
+    
     <body style="background-image: url(/images/background.webp);background-size: cover; color: #bdbde3; margin-left:2%; margin-right:2% ;">
+    
+   
         <link href="/css/layout.css" crossorigin="anonymous">
+        
         <%- include('_header'); %>
 
         <%- body %>
@@ -19,5 +25,31 @@
         <%- include('_footer'); %>
 
         <%- script %>
+
+        <script>
+            
+            <% if (locals.flash.success && locals.flash.success.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%= locals.flash.success %>",
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                    
+                }).show();    
+            <%} %>
+
+            <% if (locals.flash.error && locals.flash.error.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%= locals.flash.error %>",
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                    
+                }).show();    
+            <%} %>
+        </script>
+        
     </body>
 </html>

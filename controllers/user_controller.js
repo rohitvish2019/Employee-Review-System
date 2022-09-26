@@ -5,13 +5,17 @@ const otpGenerator = require('otp-generator');
 module.exports.login = function(req, res){
     try{
         if(req.isAuthenticated()){
+            req.flash('success', 'Logged in successfully');
             return res.redirect('/home');
+            
         }
         else{
-            res.render('login',{title:"Login"});
+            return res.render('login',{title:"Login"});
+            
         }
     }catch(err){
         console.log(err);
+        req.flash('error', 'Unknown error, Please try again');
         return res.redirect('back');
     }
 }
@@ -22,11 +26,12 @@ module.exports.createSession = function(req, res){
         if(req.isAuthenticated()){
             res.redirect('/home');
         }else{
-            res.render('login',{title:"Login"});
+            req.flash('error','Invalid username/password')
+            res.redirect('back');
         }
     }catch(err){
         console.log(err);
-        return res.redirect('back');
+        return res.redirect('/');
     }
 }
 
@@ -38,6 +43,7 @@ module.exports.logout = function(req, res){
                 console.log("failed Logging out");
                 return res.redirect('/home');
             }
+            req.flash('success', 'Logged out successfully')
             return res.redirect('/login');
         });
     }catch(err){
@@ -77,7 +83,7 @@ module.exports.emailVerify = async function(req, res){
             mailer.newUser(user, otp);
             console.log(otp);
             return res.status(200).json({
-                message:"success",
+                message:"OTP sent successfully",
                 email : req.body.email
             })
         }
@@ -106,7 +112,7 @@ module.exports.verifyOTP = async function(req, res){
         }
         else{
             return res.status(400).json({
-                message : "Bad input"
+                message : "Bad input/ Invalid OTP"
             });
         }
     }catch(err){

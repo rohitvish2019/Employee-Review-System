@@ -5,7 +5,6 @@ const passportLocal = require('passport-local').Strategy;
 const LocalStrategy = require('../configs/passport-local-strategy');
 const userController = require('../controllers/user_controller');
 
-router.use('/api', require('./api/index'))
 router.get('/', userController.login);
 router.get('/logout', passport.checkAuthentication, userController.logout);
 router.post('/email-verify', userController.emailVerify);
