@@ -25,9 +25,7 @@
         <%- include('_footer'); %>
 
         <%- script %>
-
         <script>
-            
             <% if (locals.flash.success && locals.flash.success.length > 0) {%>
                 new Noty({
                     theme: 'relax',
@@ -37,7 +35,16 @@
                     timeout: 1500
                     
                 }).show();    
-            <%} %>
+            <%}else if(locals.message && locals.message.length > 0) {%>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%=locals.message%>",
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                    
+                }).show();
+            <%}%>
 
             <% if (locals.flash.error && locals.flash.error.length > 0) {%>
                 new Noty({

@@ -7,6 +7,6 @@ const LocalStrategy = require('../configs/passport-local-strategy');
 router.post('/', passport.authenticate(
     'local',
     {failureRedirect: '/'},
-), userController.login);
-router.get('/', passport.checkAuthentication, userController.createSession);
+), userController.createSession);
+router.get('/', userController.login);
 module.exports = router;

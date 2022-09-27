@@ -2,23 +2,7 @@ document.getElementById('addNewEmployeeContainer').style.display='none'
 document.getElementById('employeeReviews').style.display='none'
 document.getElementById('allEmployeeContainer').style.display='none'
 document.getElementById('performanceReviewContaier').style.display='none'
-document.addEventListener('mouseover', function(event){
-    if(event.target.id == 'showAllEmployees'){
-        getAllEmployees();
-    }
 
-    else if(event.target.id=='addNewEmployee'){
-        addNewEmployee();
-    }
-
-    else if(event.target.id == 'prformanceReview'){
-        openPerformanceReview();
-    }
-
-    else if(event.target.id == 'pendingItems'){
-        openPedingItems();
-    }
-})
 document.addEventListener('click', function(event){
     if(event.target.id == 'showAllEmployees'){
         getAllEmployees();
@@ -125,6 +109,7 @@ function showEmploeeDetails(employees){
     document.getElementById('employeeReviews').style.display='none'
     document.getElementById('allEmployeeContainer').style.display='block'
     document.getElementById('pendingItemsContainer').style.display='none'
+    document.getElementById('performanceReviewContaier').style.display='none'
     let container = document.getElementById('allEmployee');
     container.innerHTML='';
     
@@ -351,6 +336,7 @@ function deleteReview(id){
                 layout: 'topRight',
                 timeout: 1500
             }).show(); 
+            window.location.href='/'
             console.log(data);
         },
         error: function(err){

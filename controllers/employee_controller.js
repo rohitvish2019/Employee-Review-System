@@ -37,7 +37,7 @@ module.exports.getMyReviews =async function(req, res){
             });
             if(employee){
                 return res.status(200).json({
-                    message: 'Ok',
+                    message: 'Fetched all reviews',
                     data:{
                         name : employee.name,
                         reviews :employee.myReviews
@@ -63,12 +63,16 @@ module.exports.createNew =async function(req, res){
     console.log(req.body);
     try{
         let user = await Employee.findById(req.user);
+        let makeAdmin = false;
+        if(req.isAdmin == 'on'){
+            makeAdmin = true;
+        }
         if(user && user.isAdmin == true){
             await Employee.create({
                 name:req.body.name,
                 email:req.body.email,
                 password:req.body.password,
-                isAdmin:req.body.isAdmin
+                isAdmin:makeAdmin
             });
             req.flash('success','Employee added successfully');
         }
@@ -89,7 +93,7 @@ module.exports.createNew =async function(req, res){
 
     }catch(err){
         console.log(err);
-        req.flash('error','Unauthorized request');
+        req.flash('error','Internal server error');
     }
     return res.redirect('back');
 }
