@@ -84,6 +84,7 @@ module.exports.createNew =async function(req, res){
                     isUserAdmin = true;
                 }
                 await Employee.findByIdAndUpdate(req.body.userid, {name: req.body.name, password: req.body.password, isAdmin: isUserAdmin});
+                req.flash('success','Registration succesful, Please login now');
             }
             else{
                 console.log("Unverified user")

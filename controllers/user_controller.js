@@ -3,7 +3,6 @@ let Employee = require('../models/employeeSchema');
 let mailer = require('../mailers/comment_mailer');
 const otpGenerator = require('otp-generator');
 module.exports.login = function(req, res){
-    console.log("came to login")
     try{
         if(req.isAuthenticated()){
             req.flash('success', 'Logged in successfully');
@@ -12,7 +11,7 @@ module.exports.login = function(req, res){
         }
         else{
             req.flash('error', "Invalid Username or Password");
-            req.flash('success', "Welcome to home");
+            req.flash('success', "Welcome");
             return res.render('login',{title:"Login", message:req.flash('error')});
             
         }
@@ -25,8 +24,8 @@ module.exports.login = function(req, res){
 
 
 module.exports.createSession = function(req, res){
-    console.log("came to create session")
     try{
+        req.flash('success', 'Logged in successfully');
         res.redirect('/home');
     }catch(err){
         return res.redirect('back');

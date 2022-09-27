@@ -21,11 +21,12 @@
     <div id="addNewEmployeeContainer">
         <h3>Add New Employee</h3>
         <form action="/employee/create" method="POST">
-            <input height="1.3rem" type="checkbox" name="isAdmin"><label style="font-size:1.3rem ;">Make admin?</label>
-            <input class="review-details" type="text" name="name" placeholder="Employee Name">
-            <input class="review-details" type="email" name="email" placeholder="Employee Email">
-            <input class="review-details" type="password" name="password" placeholder="Password">
-            <input class="button" type="submit" value="Add Employee">
+            
+            <input class="review-details d-block" type="text" name="name" placeholder="Employee Name">
+            <input class="review-details d-block" type="email" name="email" placeholder="Employee Email">
+            <input class="review-details d-block" type="password" name="password" placeholder="Password">
+            <input style="margin-top:2% ;" height="1.3rem" type="checkbox" name="isAdmin"><label style="font-size:1.3rem;">Make admin?</label>
+            <input class="button d-block" type="submit" value="Add Employee">
         </form>
     </div>
 

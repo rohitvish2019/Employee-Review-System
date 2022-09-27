@@ -32,12 +32,12 @@ document.addEventListener('click', function(event){
             error: function(err){
                 new Noty({
                     theme: 'relax',
-                    text: err.responseText,
+                    text: err.responseJSON.message,
                     type: 'error',
                     layout: 'topRight',
                     timeout: 1500
                 }).show(); 
-                console.log(err.responseText);
+                console.log(err);
             }
         })
     }

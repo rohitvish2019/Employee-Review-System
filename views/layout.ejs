@@ -35,18 +35,7 @@
                     timeout: 1500
                     
                 }).show();    
-            <%}else if(locals.message && locals.message.length > 0) {%>
-                new Noty({
-                    theme: 'relax',
-                    text: "<%=locals.message%>",
-                    type: 'error',
-                    layout: 'topRight',
-                    timeout: 1500
-                    
-                }).show();
-            <%}%>
-
-            <% if (locals.flash.error && locals.flash.error.length > 0) {%>
+            <%}else if(locals.flash.error && locals.flash.error.length > 0) {%>
                 new Noty({
                     theme: 'relax',
                     text: "<%= locals.flash.error %>",
@@ -54,7 +43,15 @@
                     layout: 'topRight',
                     timeout: 1500
                     
-                }).show();    
+                }).show();
+            <%}else if(locals.message && locals.message.length > 0){%>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%=locals.message%>",
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
             <%} %>
         </script>
         

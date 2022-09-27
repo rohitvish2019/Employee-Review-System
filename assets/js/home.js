@@ -335,8 +335,11 @@ function deleteReview(id){
                 type: 'success',
                 layout: 'topRight',
                 timeout: 1500
-            }).show(); 
-            window.location.href='/'
+            }).show();
+            setTimeout(function(err){
+                window.location.href='/'
+            }, 1000) 
+            
             console.log(data);
         },
         error: function(err){
