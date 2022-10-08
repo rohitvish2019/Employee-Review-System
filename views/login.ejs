@@ -8,10 +8,14 @@
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <div class="main-container">
+
+            <!--Toggeler to toggle between signup and login form-->
             <div class="toggeler">
                 <span class="heading login" id="login">Login</span>
                 <span class="heading sign-up" id="sign-up">Sign-Up</span>
             </div>
+
+            <!--Login form-->
             <div class="form-container" id="login-form-container"> 
                 <div >
                     <form action="/login" class="login-form" method="POST" id="login-form">
@@ -20,24 +24,12 @@
                         <input class="button" type="submit" value="Login" style="width:50%; align-self: center;">
                     </form>
                 </div>
-    
             </div>
-    
+            <!--Sign up form-->
             <div class="form-container" id="signup-form-container">
-                <!--
-                <form action="/employee/create" method="POST" class="login-form" id="signup-form">
-                    <input class="form-item" type="text" name="name" placeholder="Employee Name">
-                    <input class="form-item" type="email" name="email" placeholder="Employee Email">
-                    <input class="form-item" type="password" name="password" placeholder="Password">
-                    <input class="button" type="submit" value="Add Employee">
-                </form>
-                -->
                 <form action="/employee/create" class="login-form" method="POST" id="signup-form" >
                     <input class="form-item" type="text" name="name" placeholder="Your Full Name">
                     <input class="form-item" type="password" name="password" placeholder="Your Password">
-                    <div>
-                        <input height="1.3rem" class="form-item" type="checkbox" name="isAdmin"><label class="form-item"> Sign up as Admin?</label>
-                    </div>
                     <input type="text" hidden id="userid" name="userid">
                     <input class="button" id="submit-sign-up" type="submit" value="Sign-Up Now" style="width:50%; align-self: center;">
                 </form>
@@ -48,18 +40,10 @@
                     <input type="number" name="otp" class="form-item" id="otp" placeholder="OTP">
                     <input class="button" type="button" value="Verify" id="verify-button">
                 </div>
-                
-
             </div>
-
-            
-
         </div>
         
         
         <script src="/js/login.js"></script>
-        <!--
-        
-        -->
     </body>
 </html>

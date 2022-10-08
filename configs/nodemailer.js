@@ -1,3 +1,4 @@
+// Setup mail transporter
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
@@ -12,6 +13,7 @@ let transporter = nodemailer.createTransport({
     }
 });
 
+// Setup the file to be rendered
 let renderedTemplate = (data, relativePath) => {
     let mailHTML;
     console.log("rel= "+relativePath)

@@ -1,3 +1,4 @@
+// Initiates the connection from database
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/employee_reviews');

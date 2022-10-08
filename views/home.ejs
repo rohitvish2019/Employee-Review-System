@@ -4,20 +4,21 @@
 <body>
     <h1>Welcome <%=profile.name%></h1>
     <div>
-        
+        <!-- Details which needs to show to admin/normal user-->
         <%if(profile.isAdmin){%>
-            
             <button class="button" id="showAllEmployees">Show all employees</button>
             <button class="button" id="addNewEmployee">Add new employee</button>
             <button class="button" id="prformanceReview">Performance Review</button>
             <button class="button" id="pendingItems">Pending Items</button>
         <%}%>
+    <!-- To be used as container when employee details loads-->    
     <div id="allEmployeeContainer">
         <h3>All Employees</h3>
         <ul id="allEmployee">
         </ul>
     </div>
 
+    <!-- Container to be used when add new employee form is opened-->
     <div id="addNewEmployeeContainer">
         <h3>Add New Employee</h3>
         <form action="/employee/create" method="POST">
@@ -30,10 +31,12 @@
         </form>
     </div>
 
-
+    <!--Container to be used when opens reviews for an employee-->
     <div id="employeeReviews">
         <div id="myReviews"></div>
     </div>
+
+    <!--Container to be used when Assign people to review form opens-->
 
     <div class="performanceReviewContaier" id='performanceReviewContaier'>
         <form class="performanceReviewContaier" action="/employee/review-request" method="POST">
@@ -56,17 +59,16 @@
             <input class="performanceReviewContaier button" type="submit" value="Request" style="margin-top:4% ;">
         </form>
     </div>
-
+    <!--Container to be used when pending items opens-->
     <div id="pendingItemsContainer">
         <h2>Pending action items for you</h2>
-            <%for(let i=0;i<profile.pendingReviews.length;i++){%>
-                <div style="display:block;margin-top: 4%;"id="pendingItemForm-<%=profile.pendingReviews[i]._id%>">
-                    <div class="pending-reviews"><%=profile.pendingReviews[i].name%></div>
-                    <div style="display:inline-block; vertical-align:middle ;"><textarea class="reviewText" placeholder="Write your review here ..." name="" id="pendingItem-<%=profile.pendingReviews[i]._id%>" cols="80" rows="2"></textarea></div>
-                    <button class="submitReview button" id="submitReview-<%=profile.pendingReviews[i]._id%>">Review</button>
-                </div>
-            <%}%>
-        
+        <%for(let i=0;i<profile.pendingReviews.length;i++){%>
+            <div style="display:block;margin-top: 4%;"id="pendingItemForm-<%=profile.pendingReviews[i]._id%>">
+                <div class="pending-reviews"><%=profile.pendingReviews[i].name%></div>
+                <div style="display:inline-block; vertical-align:middle ;"><textarea class="reviewText" placeholder="Write your review here ..." name="" id="pendingItem-<%=profile.pendingReviews[i]._id%>" cols="80" rows="2"></textarea></div>
+                <button class="submitReview button" id="submitReview-<%=profile.pendingReviews[i]._id%>">Review</button>
+            </div>
+        <%}%>
     </div>
 </body>
 <script src = /js/home.js></script>

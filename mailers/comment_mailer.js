@@ -1,5 +1,5 @@
 const nodemailer = require("../configs/nodemailer")
-
+// Sends mail with the help of transporter
 exports.newUser = (user, otp) =>{
     console.log("email is "+user.email);
     console.log(otp);

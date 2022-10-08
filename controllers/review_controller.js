@@ -1,5 +1,8 @@
 let Review = require('../models/review_Schema');
 let Employee = require('../models/employeeSchema');
+
+// Creates new review in DB
+
 module.exports.createReview = async function(req, res){
     try{
         let employee =await Employee.findById(req.body.createdFor);
@@ -32,6 +35,9 @@ module.exports.createReview = async function(req, res){
         })
     }
 }
+
+
+// Deletes a review
 
 module.exports.deleteReview =async function(req, res){
     try{

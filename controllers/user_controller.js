@@ -2,6 +2,8 @@ let Email = require('../models/verify');
 let Employee = require('../models/employeeSchema');
 let mailer = require('../mailers/comment_mailer');
 const otpGenerator = require('otp-generator');
+
+// Reders the login page if not logged in otherwise redirects to home.
 module.exports.login = function(req, res){
     try{
         if(req.isAuthenticated()){
@@ -23,6 +25,8 @@ module.exports.login = function(req, res){
 }
 
 
+//Redirect user to home page
+
 module.exports.createSession = function(req, res){
     try{
         req.flash('success', 'Logged in successfully');
@@ -32,6 +36,7 @@ module.exports.createSession = function(req, res){
     }
 }
 
+//Logout the user and removes the req.user
 
 module.exports.logout = function(req, res){
     try{
@@ -50,6 +55,7 @@ module.exports.logout = function(req, res){
     
 }
 
+//Verify if email already exists, otherwise sent otp.
 
 module.exports.emailVerify = async function(req, res){
     try{
@@ -78,7 +84,6 @@ module.exports.emailVerify = async function(req, res){
             }
             
             mailer.newUser(user, otp);
-            console.log(otp);
             return res.status(200).json({
                 message:"OTP sent successfully",
                 email : req.body.email
@@ -91,6 +96,8 @@ module.exports.emailVerify = async function(req, res){
         })
     }
 }
+
+// Verify if the otp is correct
 
 module.exports.verifyOTP = async function(req, res){
     try{

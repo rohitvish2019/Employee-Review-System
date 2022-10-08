@@ -3,6 +3,8 @@ document.getElementById('employeeReviews').style.display='none'
 document.getElementById('allEmployeeContainer').style.display='none'
 document.getElementById('performanceReviewContaier').style.display='none'
 
+// Listener to capture the event on page and call functions accordingly
+
 document.addEventListener('click', function(event){
     if(event.target.id == 'showAllEmployees'){
         getAllEmployees();
@@ -67,6 +69,7 @@ document.addEventListener('click', function(event){
 
 })
 
+// To open the pending items form
 
 function openPedingItems(){
     document.getElementById('addNewEmployeeContainer').style.display='none'
@@ -76,6 +79,8 @@ function openPedingItems(){
     document.getElementById('pendingItemsContainer').style.display='block'
 }
 
+
+// Get all employee email and Name from DB.
 
 function getAllEmployees(){
     $.ajax({
@@ -104,6 +109,8 @@ function getAllEmployees(){
     })
 }
 
+//Show Employees on DOM
+
 function showEmploeeDetails(employees){
     document.getElementById('addNewEmployeeContainer').style.display='none'
     document.getElementById('employeeReviews').style.display='none'
@@ -119,6 +126,9 @@ function showEmploeeDetails(employees){
         `
         <div style='display:inline'><input id='name-${employees[i]._id}' class='employee-name' type='text' value = '${employees[i].name}' readonly></div>
         <div style='display:inline'><input id='email-${employees[i]._id}' class='employee-details' type='text' value='${employees[i].email}' readonly></div>
+        <div style='display:inline' class='isadmin'>
+            <input id='isAdmin-${employees[i]._id}' class='isadmin' type='checkbox'><label id='isAdminlabel-${employees[i]._id}' class='isadmin'>Make Admin</label>
+        </div>
         <textarea cols='40' class='reviewText' id="review-${employees[i]._id}" placeholder='Write review here...'></textarea>
         <button class='addReview button' id="addReview-${employees[i]._id}">Review now</button>
         <button class='showAll button' id='showAll-${employees[i]._id}'>Show all reviews</button>
@@ -130,9 +140,14 @@ function showEmploeeDetails(employees){
         item.id = 'li-'+employees[i]._id;
         item.classList.add('empDetailsContainer')
         container.append(item);
+        if(employees[i].isAdmin){
+            document.getElementById('isAdmin-'+employees[i]._id).setAttribute('checked','true');
+        }
     }
 }
 
+
+// Open form for performance review
 
 function openPerformanceReview(){
     document.getElementById('addNewEmployeeContainer').style.display='none'
@@ -143,6 +158,7 @@ function openPerformanceReview(){
 }
 
 
+//Create new review on DB
 function createNewReview(id, comment, isInPending){
     $.ajax({
         type: 'post',
@@ -175,11 +191,12 @@ function createNewReview(id, comment, isInPending){
     })
 }
 
-
+// Show all reviews for an employee on DOM
 function showReviewsForEmployee(id){
     document.getElementById('con-'+id).style.display='block';
     document.getElementById('addNewEmployeeContainer').style.display='none'
 
+    //To get reviews from DB
     document.getElementById('employeeReviews').style.display='block'
     $.ajax({
         type:'get',
@@ -238,11 +255,15 @@ function showReviewsForEmployee(id){
     
 }
 
+
+// Hide reviews container
+
 function hideReviews(id){
     document.getElementById('con-'+id).style.display='none';
     document.getElementById('hide-'+id).style.display='none'
 }
 
+// Open add new employee form
 function addNewEmployee(){
     document.getElementById('addNewEmployeeContainer').style.display='block'
     document.getElementById('employeeReviews').style.display='none'
@@ -252,6 +273,7 @@ function addNewEmployee(){
 }
 
 
+// Remove an employee from DB
 function removeEmployee(id){
     console.log(id);
     $.ajax({
@@ -280,6 +302,8 @@ function removeEmployee(id){
     })
 }
 
+//make fields editable to update employee and hide extra buttons
+
 function editEmployee(id){
     document.getElementById('name-'+id).removeAttribute('readonly')
     document.getElementById('email-'+id).removeAttribute('readonly')
@@ -289,7 +313,11 @@ function editEmployee(id){
     document.getElementById('removeMe-'+id).style.display='none'
     document.getElementById('edit-'+id).style.display='none'
     document.getElementById('update-'+id).style.display='inline-block'
+    document.getElementById('isAdmin-'+id).style.display='inline-block';
+    document.getElementById('isAdminlabel-'+id).style.display='inline-block';
 }
+
+//Update employee in DB
 
 function updateEmployee(id){
     $.ajax({
@@ -297,7 +325,8 @@ function updateEmployee(id){
         type: 'POST',
         data:{
             email : document.getElementById('email-'+id).value,
-            name: document.getElementById('name-'+id).value
+            name: document.getElementById('name-'+id).value,
+            isAdmin: document.getElementById('isAdmin-'+id).checked
         },
 
         success: function(data){
@@ -323,6 +352,7 @@ function updateEmployee(id){
     })
 }
 
+//Delete a review from DB
 
 function deleteReview(id){
     $.ajax({

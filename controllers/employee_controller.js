@@ -1,10 +1,14 @@
+// Requiring DB schemas
+
 const Employee = require('../models/employeeSchema');
 const Review = require('../models/review_Schema');
+
+// Returns the employee details only name and email to frontend
 module.exports.getAll =async function(req, res){
     try{
         let user = await Employee.findById(req.user);
         if(user && user.isAdmin == true){
-            let allEmployees = await Employee.find({_id:{$ne : req.user}},'name email');
+            let allEmployees = await Employee.find({_id:{$ne : req.user}},'name email isAdmin');
             req.flash('success',' All employees');
             return res.status(200).json({
                 allEmployees :allEmployees,
@@ -23,6 +27,8 @@ module.exports.getAll =async function(req, res){
     
 }
 
+
+// Return the reviews of an employee based on userid
 module.exports.getMyReviews =async function(req, res){
     try{
         let user = await Employee.findById(req.user);
@@ -58,6 +64,8 @@ module.exports.getMyReviews =async function(req, res){
     }
     
 }
+
+//Creates a new employee in DB
 
 module.exports.createNew =async function(req, res){
     console.log(req.body);
@@ -99,6 +107,9 @@ module.exports.createNew =async function(req, res){
     return res.redirect('back');
 }
 
+
+//Deletes an employee from DB
+
 module.exports.deleteEmployee =async function(req, res){
     try{
         let user =await Employee.findById(req.user);
@@ -127,11 +138,14 @@ module.exports.deleteEmployee =async function(req, res){
 }
 
 
+//Update the employe Name/Email as requested.
+
 module.exports.updateEmployee =async function(req, res){
     try{
         let user =await Employee.findById(req.user);
+        
         if(user && (user.isAdmin == true || req.user == req.params.id)){
-            await Employee.findByIdAndUpdate(req.params.id,{email:req.body.email, name: req.body.name});
+            await Employee.findByIdAndUpdate(req.params.id,{email:req.body.email, name: req.body.name, isAdmin:req.body.isAdmin});
             return res.status(200).json({
                 message:"Updated employee Successfully"
             })
@@ -149,6 +163,8 @@ module.exports.updateEmployee =async function(req, res){
     }
 }
 
+
+// Assign the reviewer to review. basically it adds the user id of the employee to be reviewed in pendingReviews
 
 module.exports.assignReviewer =async function(req, res){
     let user =await Employee.findById(req.user);

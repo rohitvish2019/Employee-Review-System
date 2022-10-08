@@ -1,5 +1,6 @@
 let Employee = require('../models/employeeSchema');
 const flash = require('connect-flash');
+// Renders the home page
 module.exports.home= async function(req, res){
     try{
         let profile = await Employee.findById(req.user,'name email pendingReviews isAdmin').populate('pendingReviews');
